@@ -11,7 +11,6 @@ const init_token = 'TKL02o';
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-
 router.post('/login',function (req,res,next) {
   if(!req.body.username){
     res.json({status:1,message:"用户名为空"});
@@ -28,7 +27,6 @@ router.post('/login',function (req,res,next) {
     }
   })
 });
-
 router.post('/register',function (req,res,next) {
   if(!req.body.username){
     res.json({status:1,message:"用户名为空"});
@@ -61,7 +59,6 @@ router.post('/register',function (req,res,next) {
     }
   })
 });
-
 router.post('/postComment',function (req,res,next) {
   if(!req.body.username){
     var username = "匿名用户";
@@ -86,7 +83,6 @@ router.post('/postComment',function (req,res,next) {
     }
   })
 });
-
 router.post('/support',function (req,res,next) {
   if(!req.body.movie_id){
     res.json({status:1,message:"电影ID传递失败"});
@@ -100,7 +96,6 @@ router.post('/support',function (req,res,next) {
     })
   })
 });
-
 router.post('/findPassword',function (req,res,next) {
   if(req.body.repassword){   //判断是否带有更新密码字段
     if(req.body.token){      //用户是否传有 Token值,如果有，表示用户已经登录，可以直接根据用户名和密码来验证用户，需要用户输入旧密码
@@ -160,7 +155,6 @@ router.post('/findPassword',function (req,res,next) {
     })
   }
 });
-
 router.post('/sendEmail',function (req,res,next) {
   if(!req.body.token){
     res.json({status:1,message:"用户登录状态错误"})
@@ -197,7 +191,6 @@ router.post('/sendEmail',function (req,res,next) {
     res.json({status:1,message:"用户登录错误"})
   }
 });
-
 router.post('/download',function (req,res,next) {
   if(!req.body.movie_id){
     res.json({status:1,message:"电影 ID 传递失败"});
@@ -211,7 +204,6 @@ router.post('/download',function (req,res,next) {
     })
   })
 });
-
 router.post('/showEmail',function (req,res,next) {
   if(!req.body.token){
     res.json({status:1,message:"用户登录状态错误"})
