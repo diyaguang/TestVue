@@ -43,6 +43,10 @@
     <div>
       点击次数：{{counter}}  <button @click="counter++">+1</button>
     </div>
+    <div>
+      <input type="text" v-model="message" placeholder="输入...">
+      <p>输入的内容是：{{ message }}</p>
+    </div>
   </div>
 </template>
 
@@ -51,6 +55,7 @@
         name: 'HelloWorld',
         data() {
             return {
+                message: '',
                 msg: 'This is dygstuio page',
                 link: '<a href="#">这是一个链接</a>',
                 number: 1983,
