@@ -3,6 +3,8 @@
         Hello {{ name }}<br>
         <v-tittle title="Vue组件化"></v-tittle>
         <v-button @click="handleClick">点击按钮</v-button>
+        <p>Vue路由:</p>
+        <router-view></router-view>
     </div>
 
 </template>
