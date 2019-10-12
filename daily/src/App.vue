@@ -4,16 +4,16 @@
       <div class="daily-menu-item" @click="handleToRecommend" :class="{ on:type === 'recommend' }">每日推荐</div>
       <div class="daily-menu-item" :class="{ on:type === 'daily'}" @click="showThemes = !showThemes">主题日报</div>
       <ul v-show="showThemes">
-        <li v-for="item in themes">
+        <li v-for="item in themes" :key="item.themeId">
           <a :class="{on:item.id === themeId && type === 'daily'}" @click="handleToTheme(item.id)">{{ item.name }}</a>
         </li>
       </ul>
     </div>
     <div class="daily-list" ref="list">
       <template v-if="type === 'recommend'">
-        <div v-for="list in recommendList">
+        <div v-for="list in recommendList" :key="list.themeId">
           <div class="daily-date">{{ formatDay(list.date) }}</div>
-          <Item v-for="item in list.stories" :data="item" :key="item.id"></Item>
+          <Item v-for="item in list.stories" :data="item" :key="item.id" @click.native="handleClick(item.id)"></Item>
         </div>
       </template>
       <template v-if="type === 'daily'">
@@ -21,7 +21,7 @@
       </template>
     </div>
     <div class="daily">
-      <Item @click.native="handleClick(item.id)"></Item>
+
       <DailyArticle :id="articleId"></DailyArticle>
     </div>
 
@@ -64,7 +64,7 @@
           this.isLoading = false;
         });
       },
-      handleToTheme(){
+      handleToTheme(id){
         //改变菜单分类
         this.type = 'daily';
         //设置当前点击子类的主题日报 id

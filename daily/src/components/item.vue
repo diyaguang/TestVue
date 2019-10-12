@@ -16,7 +16,7 @@
                 type: Object
             }
         },
-        data(){
+        data () {
             return {
                 imgPath: $.imgPath
             }

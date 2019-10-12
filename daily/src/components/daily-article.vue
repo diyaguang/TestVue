@@ -2,12 +2,28 @@
     <div class="daily-article">
         <div class="daily-article-title">{{ data.title }}</div>
         <div class="daily-article-content" v-html="data.body"></div>
+
+        <div class="daily-comments" v-show="comments.length">
+            <span>评论({{ comments.length }})</span>
+            <div class="daily-comment" v-for="comment in comments" :key="comment.id">
+                <div class="daily-comment-avatar">
+                    <img :src="comment.avatar">
+                </div>
+                <div class="daily-comment-content">
+                    <div class="daily-comment-name">{{ comment.author }}</div>
+                    <div class="daily-comment-time" v-time="comment.time"></div>
+                    <div class="daily-comment-text">{{ comment.content }}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     import $ from '../lib/util';
+    import Time from '../directives/time';
     export default {
+        directives: {Time},
         name: "daily-article",
         props: {
             id: {
@@ -17,7 +33,8 @@
         },
         data() {
             return {
-                data: {}
+                data: {},
+                comments: []
             }
         },
         methods: {
@@ -27,6 +44,16 @@
                    res.body = res.body.replace(/src="https/g, 'src="'+$.imgPath+'https');
                    this.data = res;
                    window.scroll(0,0);
+                   this.getComments();
+                });
+            },
+            getComments(){
+                this.comments = [];
+                $.ajax.get('story/'+this.id+'/short-comments').then(res=>{
+                   this.comments = res.comments.map(comment=>{
+                       comment.avatar = $.imgPath+comment.avatar;
+                       return comment;
+                   });
                 });
             }
         },
