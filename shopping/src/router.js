@@ -1,0 +1,18 @@
+const routers = [
+    {
+        path: '/list',
+        meta: {
+            title: '商品列表'
+        },
+        component: (resolve)=>require(['.views/list.vue'],resolve)
+    },
+    {
+        path: '/hello',
+        component: (resolve)=>require(['./components/HelloWorld.vue'],resolve)
+    },
+    {
+        path: '*',
+        redirect: '/list'
+    }
+];
+export default routers;
