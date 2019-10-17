@@ -26,15 +26,50 @@ router.beforeEach((to,from,next)=>{
   next();
 });
 
+//将数组中的数据去重处理
+function getFilterArray(array) {
+  const res=[];
+  const json = {};
+  for(let i=0;i<array.length;i++){
+    const _self = array[i];
+    if(!json[_self]){
+      res.push(_self);
+      json[_self] = 1;
+    }
+  }
+  return res;
+}
+
 const store = new Vuex.Store({
   state: {
     productList: [],
     cartList: []
   },
-  getters: {},
+  getters: {
+    brands: state => {
+      const brands = state.productList.map(item=>item.brand);
+      return getFilterArray(brands);
+    },
+    colors: state => {
+      const colors = state.productList.map(item=>item.color);
+      return getFilterArray(colors);
+    }
+  },
   mutations: {
     setProductList(state,data){
       state.productList = data;
+    },
+    //添加到购物车
+    addCart(state,id){
+      const idAdded = state.cartList.find(item=>item.id === id);
+      if(idAdded){
+        idAdded.count++;
+      }else{
+        state.cartList.push({
+          id:id,
+          count:1
+        })
+      }
     }
   },
   actions: {
