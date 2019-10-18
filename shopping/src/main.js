@@ -70,6 +70,15 @@ const store = new Vuex.Store({
           count:1
         })
       }
+    },
+    //修改商品数量
+    editCartCount(state,payload){
+      const product = state.cartList.find(item=>item.id === payload.id);
+      product.count += payload.count;
+    },
+    deleteCart(state,id){
+      const index = state.cartList.findIndex(item=>item.id === id);
+      state.cartList.splice(index,1);
     }
   },
   actions: {
