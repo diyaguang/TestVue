@@ -79,6 +79,9 @@ const store = new Vuex.Store({
     deleteCart(state,id){
       const index = state.cartList.findIndex(item=>item.id === id);
       state.cartList.splice(index,1);
+    },
+    emptyCart(state){
+      state.cartList = [];
     }
   },
   actions: {
@@ -86,6 +89,14 @@ const store = new Vuex.Store({
       setTimeout(()=>{
         context.commit('setProductList',product_data);
       },500);
+    },
+    buy(context){
+      return new Promise(resolve=>{
+        setTimeout(()=>{
+          context.commit('emptyCart');
+          resolve();
+        },500)
+      });
     }
   }
 });

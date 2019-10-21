@@ -203,4 +203,34 @@
         cursor: pointer;
         color: #2d8cf0;
     }
+    .cart-promotion{
+        padding: 16px 32px;
+    }
+    .cart-control-promotion,
+    .cart-control-order
+    {
+        display: inline-block;
+        padding: 8px 32px;
+        border-radius: 6px;
+        background: #2d8cf0;
+        color: #fff;
+        cursor: pointer;
+    }
+    .cart-control-promotion{
+        padding: 2px 6px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+    .cart-footer{
+        padding: 32px;
+        text-align: right;
+    }
+    .cart-footer-desc{
+        display: inline-block;
+        padding: 0 16px;
+    }
+    .cart-footer-desc span{
+        color: #f2352e;
+        font-size: 20px;
+    }
 </style>
